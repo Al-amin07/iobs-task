@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import hero from "../assets/chair.png";
 import icon from "../assets/icon.png";
 import { FcGoogle } from "react-icons/fc";
@@ -10,10 +10,28 @@ import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../hooks/useAuth";
 
+
 const SignUp = () => {
-  const { createUser } = useAuth();
+  
+  const navigate = useNavigate()
+  const { createUser, signInWithGoogle } = useAuth();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true)
+    try {
+      const result = await signInWithGoogle()
+      console.log(result)
+      toast.success('Login Successfull!!!')
+      navigate('/');
+    } catch (error) {
+      toast.error(error.message)
+    } finally{
+      setLoading(false)
+    }
+  }
+
   const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -31,6 +49,7 @@ const SignUp = () => {
     try {
       const result = await createUser(email, password);
       console.log(result);
+      navigate('/')
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -67,6 +86,15 @@ const SignUp = () => {
                 />
               </div>
 
+              <div className="mb-4">
+                <input
+                  type="file"
+                  name="photo"
+                  
+                  placeholder=""
+                  className="w-full p-3 border border-gray-300 bg-white rounded focus:outline-none focus:border-blue-500"
+                />
+              </div>
               <div className="mb-4">
                 <input
                   type="email"
@@ -121,7 +149,7 @@ const SignUp = () => {
               </button>
             </form>
             <div className="flex justify-between items-center mb-4 gap-3">
-              <button className="btn flex-1 bg-white w-full ">
+              <button onClick={handleGoogleSignIn} className="btn flex-1 bg-white w-full ">
                 <FcGoogle size={24} />
                 Sign in with Google
               </button>

@@ -1,0 +1,8 @@
+.nav.active{
+    text-decoration: underline;
+    text-decoration-color: #1E99F5;
+    color: #1E99F5;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 3px;
+    font-weight: 900;
+}
