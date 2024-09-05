@@ -9,6 +9,8 @@ import SignUp from "./Pages/SignUp.jsx";
 import { Toaster } from "react-hot-toast";
 import Products from "./Pages/Products.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CartPage from "./Pages/CartPage.jsx";
+import Private from "./Provider/Private.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
         path: "/products",
         element: <Products />,
       },
+      {
+        path: '/cart',
+        element: <Private ><CartPage /></Private>
+      }
     ],
   },
   {

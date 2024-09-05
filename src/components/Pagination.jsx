@@ -28,7 +28,7 @@ const Pagination = ({ totalPages: pages, setStartItem, startItem }) => {
         <button
           key={item}
           onClick={() => setStartItem(item)}
-          className={`hidden px-4 py-2 mx-1 border rounded-md font-bold text-gray-700 transition-colors duration-300 transform bg-white  sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 ${
+          className={`hidden px-4 py-2 mx-1 border rounded-md font-bold text-gray-700 transition-colors duration-300 transform   sm:inline  hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white ${
             startItem === item && "bg-blue-500 text-white"
           }`}
         >

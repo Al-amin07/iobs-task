@@ -16,6 +16,7 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const { login, signInWithGoogle } = useAuth();
   const location = useLocation();
+  console.log(location)
   const path = location?.state ? location.state : '/';
   const handleGoogleSignIn = async () => {
     setLoading(true)

@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
 
   // Get Chairs
   const axiosCommon = useAxiosCommon()
-  const { data : chairs = [], isLoading, refetch } = useQuery({
+  const { data : chairs = [], isLoading } = useQuery({
     queryKey: ['chairs'],
     queryFn: async () => {
         const { data } = await axiosCommon.get('/chairs');
