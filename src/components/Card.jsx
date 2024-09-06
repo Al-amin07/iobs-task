@@ -1,4 +1,5 @@
-import chair from "../assets/chair1.png";
+import { GrCart } from "react-icons/gr";
+
 import PropTypes from "prop-types";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -7,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosCommon from "../hooks/useAxiosCommon ";
 import toast from "react-hot-toast";
 import useCart from "../hooks/useCart";
+import './shared/Navbar.css'
 const Card = ({ data }) => {
   const { user } = useAuth();
   const [, , refetch] = useCart();
@@ -27,8 +29,12 @@ const Card = ({ data }) => {
         if (result.isConfirmed) {
           navigate("/login", { state: location.pathname });
         }
+        else{
+          return ;
+        }
       });
     }
+   else{
     const cartDetails = {
       items: 
         {
@@ -53,14 +59,15 @@ const Card = ({ data }) => {
     } catch (error) {
       toast.error(error?.message);
     }
+   }
   };
   return (
     <div className="p-3  border rounded-xl group hover:shadow-lg">
       <div className="bg-base-200 flex justify-center items-center">
         <img
-          src={chair}
+          src={data?.image}
           alt=""
-          className="object-cover group-hover:scale-110"
+          className="bg-transparent mix-blend-multiply h-[215px] object-cover group-hover:scale-110"
         />
       </div>
       <h2 className="text-xl font-medium mt-4 mb-2">{data?.name}</h2>
@@ -79,6 +86,7 @@ const Card = ({ data }) => {
         onClick={handleCart}
         className="btn w-full bg-black  hover:bg-slate-800 text-white"
       >
+        <GrCart size={22}/>
         Add to cart{" "}
       </button>
     </div>

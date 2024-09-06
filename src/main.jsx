@@ -12,12 +12,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CartPage from "./Pages/CartPage.jsx";
 import Private from "./Provider/Private.jsx";
 import Home from "./Pages/Home.jsx";
-
+import Error from "./components/Error.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
