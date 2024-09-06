@@ -4,12 +4,15 @@ import useAuth from "../../hooks/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
 import "./Navbar.css";
 import useCart from "../../hooks/useCart";
+import { useState } from "react";
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { logOut } = useAuth();
-  const [ carts ] = useCart();
+  const [carts] = useCart();
   const handleLogOut = async () => {
-    await logOut()
-  }
+    await logOut();
+  };
+
   const navLinks = (
     <>
       <li>
@@ -22,10 +25,43 @@ const Navbar = () => {
           Products
         </NavLink>
       </li>
-      <li>
-        <NavLink className={"text-lg font-medium nav"} to={"/category"}>
+      <li
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        className="relative"
+      >
+        <button className={"text-lg font-medium nav"}>
           Categories
-        </NavLink>
+          {isOpen && (
+            <div
+              className={`absolute top-7 w-[200px] bg-white shadow-lg p-4 rounded-xl flex flex-col space-y-1 text-left opacity-100  `}
+            >
+              <Link
+                to={"/products?category=Rocking Chair"}
+                className="py-1 px-4 hover:bg-blue-500  text-black rounded-lg hover:text-white"
+              >
+                Rocking Chair
+              </Link>
+              <Link
+                to={"/products?category=Side Chair"}
+                className="py-1 px-4 hover:bg-blue-500 text-black rounded-lg hover:text-white"
+              >
+                Side Chair
+              </Link>
+              <Link
+                to={"/products?category=Lounge Chair"}
+                className="py-1 px-4 hover:bg-blue-500 text-black rounded-lg hover:text-white"
+              >
+                Lounge Chair
+              </Link>
+            </div>
+          )}
+          {/* <div className={`absolute top-7 w-[200px] bg-white shadow-lg p-4 rounded-xl flex flex-col space-y-1 text-left opacity-0 -z-20 ${isOpen && 'opacity-100 z-30 transition-all duration-700 border' }`}>
+          <Link to={'/products?category=Rocking Chair'} className="py-1 px-4 hover:bg-blue-500  text-black rounded-lg hover:text-white">Rocking Chair</Link>
+          <Link to={'/products?category=Side Chair'} className="py-1 px-4 hover:bg-blue-500 text-black rounded-lg hover:text-white">Side Chair</Link>
+          <Link to={'/products?category=Lounge Chair'} className="py-1 px-4 hover:bg-blue-500 text-black rounded-lg hover:text-white">Lounge Chair</Link>
+        </div> */}
+        </button>
       </li>
       <li>
         <NavLink className={"text-lg font-medium nav"} to={"/custom"}>
@@ -75,21 +111,29 @@ const Navbar = () => {
         <ul className="flex gap-5 items-center px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end space-x-4">
-       
         {user ? (
           <>
-           <Link to={'/cart'} className="relative hover:scale-110 transition-all mr-5">
-          <FaShoppingCart size={36} />
-          <span className="  text-center absolute bottom-0 h-6 w-6  rounded-full -right-4 font-bold bg-red-500 text-white">
-            {carts?.items?.reduce((sum, item) => sum + item.quentity,0) || 0}
-          </span>
-        </Link>
-        <div className="avatar hover:scale-75 transition-all">
-          <div className="w-12 rounded-full">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-          </div>
-        </div>
-        <button onClick={handleLogOut} className="py-2 hover:scale-105 transition-all px-4 rounded-full bg-red-500 text-white">Log Out</button>
+            <Link
+              to={"/cart"}
+              className="relative hover:scale-110 transition-all mr-5"
+            >
+              <FaShoppingCart size={36} />
+              <span className="  text-center absolute bottom-0 h-6 w-6  rounded-full -right-4 font-bold bg-red-500 text-white">
+                {carts?.items?.reduce((sum, item) => sum + item.quentity, 0) ||
+                  0}
+              </span>
+            </Link>
+            <div className="avatar hover:scale-75 transition-all">
+              <div className="w-12 rounded-full">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </div>
+            <button
+              onClick={handleLogOut}
+              className="py-2 hover:scale-105 transition-all px-4 rounded-full bg-red-500 text-white"
+            >
+              Log Out
+            </button>
           </>
         ) : (
           <>
