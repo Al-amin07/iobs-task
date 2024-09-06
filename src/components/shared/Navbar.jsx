@@ -139,7 +139,7 @@ const Navbar = () => {
           <>
             <Link
               to={"/login"}
-              className="btn bg-gradient-to-t from-blue-600 to-purple-600 text-white"
+              className="py-2 hover:scale-105 transition-all px-4 rounded-full bg-blue-500 text-white font-semibold text-lg"
             >
               Login
             </Link>

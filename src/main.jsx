@@ -11,6 +11,7 @@ import Products from "./Pages/Products.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CartPage from "./Pages/CartPage.jsx";
 import Private from "./Provider/Private.jsx";
+import Home from "./Pages/Home.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      {
+        index: true,
+        element: <Home />
+      },
       {
         path: "/products",
         element: <Products />,
