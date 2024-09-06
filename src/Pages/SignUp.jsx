@@ -9,28 +9,27 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../hooks/useAuth";
-
+import GetImage from "../components/GetImage";
 
 const SignUp = () => {
-  
-  const navigate = useNavigate()
-  const { createUser, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const { createUser, signInWithGoogle, updateUserProfile } = useAuth();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleGoogleSignIn = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const result = await signInWithGoogle()
-      console.log(result)
-      toast.success('Login Successfull!!!')
-      navigate('/');
+      const result = await signInWithGoogle();
+      console.log(result);
+      toast.success("Login Successfull!!!");
+      navigate("/");
     } catch (error) {
-      toast.error(error.message)
-    } finally{
-      setLoading(false)
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -39,7 +38,9 @@ const SignUp = () => {
     const lastName = e.target.lname.value || "";
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const photo = e.target.photo.files[0];
     const terms = e.target.terms.checked;
+
     if (!terms) {
       toast.error("Please accept terms and condition");
       setLoading(false);
@@ -47,9 +48,11 @@ const SignUp = () => {
     }
     // console.log(email, password, firstName, lastName);
     try {
+      const image = await GetImage(photo);
       const result = await createUser(email, password);
       console.log(result);
-      navigate('/')
+      await updateUserProfile(firstName + " " + lastName, image);
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -90,9 +93,9 @@ const SignUp = () => {
                 <input
                   type="file"
                   name="photo"
-                  
+                  required
                   placeholder=""
-                  className="w-full p-3 border border-gray-300 bg-white rounded focus:outline-none focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 bg-white rounded focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div className="mb-4">
@@ -149,7 +152,10 @@ const SignUp = () => {
               </button>
             </form>
             <div className="flex justify-between items-center mb-4 gap-3">
-              <button onClick={handleGoogleSignIn} className="btn flex-1 bg-white w-full ">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn flex-1 bg-white w-full "
+              >
                 <FcGoogle size={24} />
                 Sign in with Google
               </button>

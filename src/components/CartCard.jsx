@@ -1,6 +1,7 @@
 import hero from "../assets/chair1.png";
-import PropTypes from 'prop-types'
-const CartCard = ({ item, handleDelete, handleCartQuantity }) => {
+import PropTypes from 'prop-types';
+import { ImSpinner9 } from "react-icons/im";
+const CartCard = ({ item, handleDelete, handleCartQuantity, isLoading }) => {
   return (
     <div className=" hover:shadow-lg rounded-md py-3 bg-white px-4 relative">
      
@@ -26,6 +27,7 @@ CartCard.propTypes = {
     item: PropTypes.object,
     handleDelete: PropTypes.func,
     handleCartQuantity: PropTypes.func,
+    isLoading: PropTypes.bool,
 }
 
 export default CartCard;

@@ -125,7 +125,8 @@ const Navbar = () => {
             </Link>
             <div className="avatar hover:scale-75 transition-all">
               <div className="w-12 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img src={user?.photoURL} />
+                {/* <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> */}
               </div>
             </div>
             <button
@@ -142,6 +143,12 @@ const Navbar = () => {
               className="py-2 hover:scale-105 transition-all px-4 rounded-full bg-blue-500 text-white font-semibold text-lg"
             >
               Login
+            </Link>
+            <Link
+              to={"/signup"}
+              className="py-2 hover:scale-105 transition-all px-4 rounded-full bg-[#EF4444] text-white font-semibold text-lg"
+            >
+              Sign Up
             </Link>
           </>
         )}
