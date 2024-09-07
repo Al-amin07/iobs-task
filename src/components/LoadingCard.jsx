@@ -20,11 +20,7 @@ const LoadingCard = () => {
           <div className='h-5 bg-slate-300 rounded w-1/4 animate-pulse' />
         </div>
       
-        {/* Description Skeleton */}
-        <div className='mt-2 mb-3'>
-          <div className='h-4 bg-slate-300 rounded w-full animate-pulse mb-2' />
-          <div className='h-4 bg-slate-300 rounded w-5/6 animate-pulse' />
-        </div>
+     
       
         {/* Button Skeleton */}
         <div className='mt-3'>

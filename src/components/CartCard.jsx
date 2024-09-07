@@ -1,7 +1,8 @@
 import hero from "../assets/chair1.png";
 import PropTypes from 'prop-types';
-import { ImSpinner9 } from "react-icons/im";
-const CartCard = ({ item, handleDelete, handleCartQuantity, isLoading }) => {
+
+
+const CartCard = ({ item, handleDelete, handleCartQuantity}) => {
   return (
     <div className=" hover:shadow-lg rounded-md py-3 bg-white px-4 relative">
      
@@ -12,13 +13,15 @@ const CartCard = ({ item, handleDelete, handleCartQuantity, isLoading }) => {
           <h2 onClick={() => handleCartQuantity(item?.itemId, true)} className="text-3xl px-3 hover:bg-base-300 rounded-lg cursor-pointer ">+</h2>
         </div>
         <div className="flex gap-2">
-          <img src={hero} className="h-28 w-28 bg-base-200 p-4 rounded-xl" alt="" />
+          <div className="bg-base-200 p-2">
+          <img src={item?.image} className="h-24 bg-transparent mix-blend-multiply w-24 rounded-xl" alt="" />
+          </div>
         <h2 className="text-lg font-bold mt-3">{item?.name}</h2>
         </div>
       </div>
       <h2 onClick={() => handleDelete(item?.itemId)} className="text-4xl absolute btn btn-ghost right-0 top-0 font-light text-slate-600">X</h2>
       <h2 className="text-xl text-end font-semibold ">€ {Number(item?.price * item?.quentity).toFixed(2)}</h2>
-   
+    
     </div>
   );
 };
