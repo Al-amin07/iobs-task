@@ -10,9 +10,7 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            console.log(user?.email)
             const { data } = await axiosCommon.get(`/add-to-cart/${user?.email}`)
-            console.log(data)
             return data
         }
     })

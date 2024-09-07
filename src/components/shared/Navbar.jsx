@@ -34,7 +34,7 @@ const Navbar = () => {
           Categories
           {isOpen && (
             <div
-              className={`absolute top-7 w-[200px] bg-white shadow-lg p-4 rounded-xl flex flex-col space-y-1 text-left opacity-100  `}
+              className={`absolute hidden top-7 w-[200px] bg-white shadow-lg p-4 rounded-xl md:flex flex-col space-y-1 text-left `}
             >
               <Link
                 to={"/products?category=Rocking Chair"}
@@ -77,7 +77,9 @@ const Navbar = () => {
   );
   const { user } = useAuth();
   return (
-    <div className="navbar bg-base-100 py-3 fixed top-0  shadow-md  z-30 px-20">
+    <div className="navbar bg-base-100 py-3 fixed top-0  shadow-md  z-30 
+    px-2
+    md:px-12 lg:px-20">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

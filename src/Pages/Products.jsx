@@ -49,8 +49,8 @@ const Products = () => {
     navigate(str);
   };
   return (
-    <div className="flex gap-10 mb-16">
-      <div className="border rounded-md w-[270px] px-6 space-y-4 py-5">
+    <div className="flex gap-4 md:gap-6 lg:gap-10 mb-16">
+      <div className="border rounded-md w-[270px] px-3 md:px-6 space-y-4 py-5">
         {categories.map((item) => (
           <h2
             onClick={() => handleQuery(item?.title)}
@@ -64,7 +64,7 @@ const Products = () => {
         ))}
       </div>
       <div className="flex-1 ">
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {
             isLoading && [...Array(6).keys()].map((item, ind) => (
               <LoadingCard key={ind}/>

@@ -43,9 +43,7 @@ const AuthProvider = ({ children }) => {
   // Sign Out
   const logOut = async () => {
     setLoading(true);
-    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
+   await axiosCommon.get('/logout', {withCredentials: true})
     return signOut(auth);
   };
 
